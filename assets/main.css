@@ -41,10 +41,11 @@ body {
     background-size: cover;
     background-position: center;
     color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 body * {
-    animation: floatIn 1s ease-out;
+    animation: floatIn 0.8s ease-out;
 }
 
 .avatar {
@@ -174,6 +175,7 @@ h1 {
     margin-top: 30px;
     font-size: 12px;
     color: rgba(220, 220, 220, 0.8);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     text-align: center;
     letter-spacing: 1px;
     line-height: 1.5;

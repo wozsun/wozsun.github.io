@@ -35,7 +35,7 @@ body {
     min-height: 100vh;
     font-family: 'Noto Sans SC', sans-serif;
     margin: 0;
-    padding: 0;
+    overflow: hidden;
     background-image: url('https://api.wozsun.com/random-img?theme=dark');
     backdrop-filter: blur(1px);
     background-size: cover;

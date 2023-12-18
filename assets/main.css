@@ -82,6 +82,7 @@ h1 {
 }
 
 .projects-down {
+    margin-top: 30px; /* remove when projects-up exists */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

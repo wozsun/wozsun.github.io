@@ -1,4 +1,4 @@
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', function () {
     const hostname = window.location.hostname;
     var master = document.querySelector('.mname');
     var projectsd = document.querySelector('.projects-down');
@@ -68,4 +68,4 @@ window.onload = function () {
             Powered by <a class="flinktxt" href="https://url.cn/d2HDR47V" target="_blank">Tencent Cloud</a>
         </div>
     `;
-}
+})

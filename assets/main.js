@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             name = 'ZeSean';
             host = 'zesn.cn';
             icp = '-2';
-            mps = '000';
+            mps = '42018502007466';
             projectds = projectdz;
             projectddcs = projectddcz;
             document.title = 'ZeSean';

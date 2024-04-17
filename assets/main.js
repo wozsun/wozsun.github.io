@@ -1,20 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     const hostname = window.location.hostname;
-    var master = document.querySelector('.mname');
-    var projectsu = document.querySelector('.projects-up');
-    var projectsd = document.querySelector('.projects-down');
-    var footer = document.querySelector('.footer');
-
     const currentYear = new Date().getFullYear();
 
-    var name = null;
-    var host = null;
-    var icp = null;
-    var mps = null;
-    var projectus = null; //project-up-select
-    var projectudcs = null; //project-up-description-select
-    var projectds = null; //project-down-select
-    var projectddcs = null; //project-down-description-select
+    let name = null;
+    let host = null;
+    let icp = null;
+    let mps = null;
+    let projectus = null; //project-up-select
+    let projectudcs = null; //project-up-description-select
+    let projectds = null; //project-down-select
+    let projectddcs = null; //project-down-description-select
     const projectuw = [];
     const projectudcw = [];
     const projectuz = [];
@@ -53,26 +48,40 @@ document.addEventListener('DOMContentLoaded', function () {
             document.title = '我的主页';
     };
 
+    let master = document.querySelector('.mname');
     master.innerHTML = name;
 
-    const projectuLinks = [];
-    for (let i = 0; i < projectus.length; i++) {
-        const link = `https://${projectus[i]}.${host}`;
-        const projectDiv = `<div class="project-up">${projectudcs[i]}</div>`;
-        const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
-        projectuLinks.push(projectLink);
-    }
-    projectsu.innerHTML = projectuLinks.join('\n');
+    if (projectus.length === 0) {
+        const projectsuDiv = document.getElementByClassName('projects-up');
+        projectsuDiv.remove();
+    } else {
+        const projectuLinks = [];
+        for (let i = 0; i < projectus.length; i++) {
+            const link = `https://${projectus[i]}.${host}`;
+            const projectDiv = `<div class="project-up">${projectudcs[i]}</div>`;
+            const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
+            projectuLinks.push(projectLink);
+        }
+        let projectsu = document.querySelector('.projects-up');
+        projectsu.innerHTML = projectuLinks.join('\n');
+    };
 
-    const projectdLinks = [];
-    for (let i = 0; i < projectds.length; i++) {
-        const link = `https://${projectds[i]}.${host}`;
-        const projectDiv = `<div class="project-down">${projectddcs[i]}</div>`;
-        const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
-        projectdLinks.push(projectLink);
-    }
-    projectsd.innerHTML = projectdLinks.join('\n');
+    if (projectds.length === 0) {
+        const projectsdDiv = document.getElementsByClassName('projects-down');
+        projectsdDiv.remove();
+    } else {
+        const projectdLinks = [];
+        for (let i = 0; i < projectds.length; i++) {
+            const link = `https://${projectds[i]}.${host}`;
+            const projectDiv = `<div class="project-down">${projectddcs[i]}</div>`;
+            const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
+            projectdLinks.push(projectLink);
+        }
+        let projectsd = document.querySelector('.projects-down');
+        projectsd.innerHTML = projectdLinks.join('\n');
+    };
 
+    let footer = document.querySelector('.footer');
     footer.innerHTML = `
         <div>
             <a class="flinktxt" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2022020520号${icp}</a> |

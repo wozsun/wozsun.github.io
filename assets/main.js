@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
             host = 'localhost';
             icp = '-0';
             mps = '00000000000000';
-            projectus = projectuz;
-            projectudcs = projectudcz;
-            projectds = projectdz;
-            projectddcs = projectddcz;
+            projectus = [];
+            projectudcs = [];
+            projectds = [];
+            projectddcs = [];
             document.title = '我的主页';
     };
 
@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const projectuLinks = [];
         for (let i = 0; i < projectus.length; i++) {
             const link = `https://${projectus[i]}.${host}`;
-            const projectDiv = `<div class="project-up">${projectudcs[i]}</div>`;
-            const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
+            const projectDesc = `<div class="project-up">${projectudcs[i]}</div>`;
+            const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDesc}</a>`;
             projectuLinks.push(projectLink);
         }
         let projectsu = document.querySelector('.projects-up');
@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const projectdLinks = [];
         for (let i = 0; i < projectds.length; i++) {
             const link = `https://${projectds[i]}.${host}`;
-            const projectDiv = `<div class="project-down">${projectddcs[i]}</div>`;
-            const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
+            const projectDesc = `<div class="project-down">${projectddcs[i]}</div>`;
+            const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDesc}</a>`;
             projectdLinks.push(projectLink);
         }
         let projectsd = document.querySelector('.projects-down');

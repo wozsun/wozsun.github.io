@@ -12,12 +12,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let projectddcs = null; //project-down-description-select
     const projectuw = [];
     const projectudcw = [];
-    const projectuz = [];
-    const projectudcz = [];
     const projectdw = ['code', 'drive', 'cloud'];
     const projectddcw = ['仓库', '网盘', '私云'];
-    const projectdz = [];
-    const projectddcz = [];
 
     switch (hostname) {
         case 'wozsun.com':
@@ -31,18 +27,6 @@ document.addEventListener('DOMContentLoaded', function () {
             projectds = projectdw;
             projectddcs = projectddcw;
             document.title = 'wozsun';
-            break;
-        case 'zesn.cn':
-        case 'www.zesn.cn':
-            name = 'ZeSean';
-            host = 'zesn.cn';
-            icp = '-2';
-            mps = '42018502007466';
-            projectus = projectuz;
-            projectudcs = projectudcz;
-            projectds = projectdz;
-            projectddcs = projectddcz;
-            document.title = 'ZeSean';
             break;
         default:
             name = 'ZeSean Woo';

@@ -22,13 +22,13 @@ window.onload = function () {
     master.innerHTML = name;
     footer.innerHTML = `
         <div>
-            Copyright © 2022-${currentYear} <a class="flinktxt" href="https://www.wozsun.com" target="_blank">${name}</a> | All Rights
-            Reserved
-        </div>
-        <div>
             <a class="flinktxt" href="https://beian.miit.gov.cn/" target="_blank">鄂ICP备2022020520号${icp}</a> |
             <a class="flinktxt" href="https://beian.mps.gov.cn/#/query/webSearch?code=${mps}"
                 target="_blank">鄂公网安备${mps}号</a>
+        </div>
+        <div>
+            Copyright © 2022-${currentYear} <a class="flinktxt" href="https://www.wozsun.com" target="_blank">${name}</a> | All Rights
+            Reserved
         </div>
         <div>
             Powered by <a class="flinktxt" href="https://url.cn/d2HDR47V" target="_blank">Tencent Cloud</a>

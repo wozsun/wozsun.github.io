@@ -6,18 +6,18 @@ window.onload = function () {
     var currentYear = new Date().getFullYear(); // 获取当前年份
 
     var name = null;
-    var home = null;
+    var host = null;
     var icp = null;
     var mps = null;
 
     if (hostname === 'wozsun.com' || hostname === 'www.wozsun.com') {
         name = 'wozsun';
-        home = 'wozsun.com';
+        host = 'wozsun.com';
         icp = '-1';
         mps = '42018502006419';
     } else if (hostname === 'zesn.cn' || hostname === 'www.zesn.cn') {
         name = 'ZeSean';
-        home = 'zesn.cn';
+        host = 'zesn.cn';
         icp = '-2';
         mps = '000';
     }
@@ -30,7 +30,7 @@ window.onload = function () {
                 target="_blank">鄂公网安备${mps}号</a>
         </div>
         <div>
-            Copyright © 2022-${currentYear} <a class="flinktxt" href="https://www.${home}" target="_blank">${name}</a> | All Rights
+            Copyright © 2022-${currentYear} <a class="flinktxt" href="https://www.${host}" target="_blank">${name}</a> | All Rights
             Reserved
         </div>
         <div>

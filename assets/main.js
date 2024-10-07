@@ -45,6 +45,14 @@ document.addEventListener('DOMContentLoaded', function () {
             document.title = 'ZeSean';
             break;
         default:
+            name = 'ZeSean Woo';
+            host = 'localhost';
+            icp = '-0';
+            mps = '00000000000000';
+            projectus = projectuz;
+            projectudcs = projectudcz;
+            projectds = projectdz;
+            projectddcs = projectddcz;
             document.title = '我的主页';
     };
 
@@ -52,8 +60,10 @@ document.addEventListener('DOMContentLoaded', function () {
     master.innerHTML = name;
 
     if (projectus.length === 0) {
-        const projectsuDiv = document.getElementByClassName('projects-up');
-        projectsuDiv.remove();
+        let projectsuDiv = document.querySelector('.projects-up');
+        if (projectsuDiv) {
+            projectsuDiv.remove();
+        }
     } else {
         const projectuLinks = [];
         for (let i = 0; i < projectus.length; i++) {
@@ -63,12 +73,16 @@ document.addEventListener('DOMContentLoaded', function () {
             projectuLinks.push(projectLink);
         }
         let projectsu = document.querySelector('.projects-up');
-        projectsu.innerHTML = projectuLinks.join('\n');
+        if (projectsu) {
+            projectsu.innerHTML = projectuLinks.join('\n');
+        }
     };
 
     if (projectds.length === 0) {
-        const projectsdDiv = document.getElementsByClassName('projects-down');
-        projectsdDiv.remove();
+        let projectsdDiv = document.querySelector('.projects-down');
+        if (projectsdDiv) {
+            projectsdDiv.remove();
+        }
     } else {
         const projectdLinks = [];
         for (let i = 0; i < projectds.length; i++) {
@@ -78,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function () {
             projectdLinks.push(projectLink);
         }
         let projectsd = document.querySelector('.projects-down');
-        projectsd.innerHTML = projectdLinks.join('\n');
+        if (projectsd) {
+            projectsd.innerHTML = projectdLinks.join('\n');
+        }
     };
 
     let footer = document.querySelector('.footer');

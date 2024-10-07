@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const hostname = window.location.hostname;
     var master = document.querySelector('.mname');
+    var projectsu = document.querySelector('.projects-up');
     var projectsd = document.querySelector('.projects-down');
     var footer = document.querySelector('.footer');
 
@@ -10,12 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var host = null;
     var icp = null;
     var mps = null;
+    var projectus = null; //project-up-select
+    var projectudcs = null; //project-up-description-select
     var projectds = null; //project-down-select
     var projectddcs = null; //project-down-description-select
+    const projectuw = [];
+    const projectudcw = [];
+    const projectuz = [];
+    const projectudcz = [];
     const projectdw = ['code', 'drive', 'cloud'];
     const projectddcw = ['仓库', '网盘', '私云'];
-    const projectdz = ['docs', 'life'];
-    const projectddcz = ['文档', '生活'];
+    const projectdz = [];
+    const projectddcz = [];
 
     switch (hostname) {
         case 'wozsun.com':
@@ -24,6 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
             host = 'wozsun.com';
             icp = '-1';
             mps = '42018502006419';
+            projectus = projectuw;
+            projectudcs = projectudcw;
             projectds = projectdw;
             projectddcs = projectddcw;
             document.title = 'wozsun';
@@ -34,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
             host = 'zesn.cn';
             icp = '-2';
             mps = '42018502007466';
+            projectus = projectuz;
+            projectudcs = projectudcz;
             projectds = projectdz;
             projectddcs = projectddcz;
             document.title = 'ZeSean';
@@ -44,15 +55,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
     master.innerHTML = name;
 
-    const projectLinks = [];
+    const projectuLinks = [];
+    for (let i = 0; i < projectus.length; i++) {
+        const link = `https://${projectus[i]}.${host}`;
+        const projectDiv = `<div class="project-up">${projectudcs[i]}</div>`;
+        const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
+        projectuLinks.push(projectLink);
+    }
+    projectsu.innerHTML = projectuLinks.join('\n');
+
+    const projectdLinks = [];
     for (let i = 0; i < projectds.length; i++) {
         const link = `https://${projectds[i]}.${host}`;
         const projectDiv = `<div class="project-down">${projectddcs[i]}</div>`;
         const projectLink = `<a class="linktxt" href="${link}" target="_blank">${projectDiv}</a>`;
-        projectLinks.push(projectLink);
+        projectdLinks.push(projectLink);
     }
-    const projectsHTML = projectLinks.join('\n');
-    projectsd.innerHTML = projectsHTML;
+    projectsd.innerHTML = projectdLinks.join('\n');
 
     footer.innerHTML = `
         <div>

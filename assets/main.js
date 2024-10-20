@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const projectus = [];//project-up-select
     const projectudcs = [];//project-up-description-select
-    const projectds = ['drive'];//project-down-select
-    const projectddcs = ['网盘'];//project-down-description-select
+    const projectds = [];//project-down-select
+    const projectddcs = [];//project-down-description-select
 
     if (projectus.length === 0) {
         let projectsuDiv = document.querySelector('.projects-up');

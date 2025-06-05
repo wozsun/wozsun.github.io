@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Reserved
         </div>
         <div>
-            Powered by <a class="flinktxt" href="https://url.cn/d2HDR47V" target="_blank">Tencent Cloud</a>
+            Powered by Tencent Cloud & Alibaba Cloud
         </div>
     `;
 })

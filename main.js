@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
 
-    const projectus = [ 'docs' ];//project-up-select
-    const projectudcs = [ 'AFFiNE' ];//project-up-description-select
+    const projectus = [ 'drive', 'cloud' ];//project-up-select
+    const projectudcs = [ 'AList', 'Cloudreve' ];//project-up-description-select
     const projectds = [];//project-down-select
     const projectddcs = [];//project-down-description-select
 

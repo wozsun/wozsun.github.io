@@ -36,7 +36,7 @@ body {
     font-family: 'Noto Sans SC', sans-serif;
     margin: 0;
     overflow: hidden;
-    background-image: url('https://api.wozsun.com/random-img?theme=dark');
+    background-image: url('https://api.wozsun.com/random-img?b=dark&t=wlop,acg');
     backdrop-filter: blur(1px);
     background-size: cover;
     background-position: center;

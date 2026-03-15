@@ -81,7 +81,7 @@ body::after {
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    background: rgba(200, 200, 200, 0.2);
+    background: rgba(200, 200, 200, 0.12);
 }
 
 body:not(.bg-ready) > * {

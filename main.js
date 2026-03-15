@@ -1,16 +1,71 @@
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
     const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,nature';
+    const bgRetryIntervalMs = 100;
+    const bgTotalTimeoutMs = 2000;
 
-    const bgImg = new Image();
-    bgImg.decoding = 'async';
-    bgImg.src = backgroundImageUrl;
+    let hasRevealed = false;
+    let bgTimeoutId = null;
+    const bgDeadline = Date.now() + bgTotalTimeoutMs;
+    const revealPage = function (loadedUrl) {
+        if (hasRevealed) {
+            return;
+        }
+        hasRevealed = true;
 
-    bgImg.addEventListener('load', function () {
-        const loadedUrl = bgImg.currentSrc || bgImg.src;
-        document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
+        if (bgTimeoutId !== null) {
+            clearTimeout(bgTimeoutId);
+            bgTimeoutId = null;
+        }
+
+        if (loadedUrl) {
+            document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
+        }
+
         document.body.classList.add('bg-ready');
-    });
+    };
+
+    const requestBgImage = function () {
+        if (hasRevealed) {
+            return;
+        }
+
+        if (Date.now() >= bgDeadline) {
+            revealPage();
+            return;
+        }
+
+        const bgImg = new Image();
+        bgImg.decoding = 'async';
+
+        bgImg.addEventListener('load', function () {
+            const loadedUrl = bgImg.currentSrc || bgImg.src;
+            revealPage(loadedUrl);
+        });
+
+        bgImg.addEventListener('error', function () {
+            const now = Date.now();
+            const timeLeft = bgDeadline - now;
+
+            if (timeLeft <= 0) {
+                revealPage();
+                return;
+            }
+
+            const nextDelay = Math.min(bgRetryIntervalMs, timeLeft);
+            setTimeout(function () {
+                requestBgImage();
+            }, nextDelay);
+        });
+
+        bgImg.src = backgroundImageUrl;
+    };
+
+    requestBgImage();
+
+    bgTimeoutId = setTimeout(function () {
+        revealPage();
+    }, bgTotalTimeoutMs);
 
     const projectus = [ 'drive', 'cloud' ];//project-up-select
     const projectudcs = [ 'AList', 'Cloudreve' ];//project-up-description-select

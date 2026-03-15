@@ -13,10 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         hasRevealed = true;
 
-        if (bgTimeoutId !== null) {
-            clearTimeout(bgTimeoutId);
-            bgTimeoutId = null;
-        }
+        clearTimeout(bgTimeoutId);
+        bgTimeoutId = null;
 
         if (loadedUrl) {
             document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
@@ -40,22 +38,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
         bgImg.addEventListener('load', function () {
             const loadedUrl = bgImg.currentSrc || bgImg.src;
-            revealPage(loadedUrl);
+            if (hasRevealed) {
+                document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
+            } else {
+                revealPage(loadedUrl);
+            }
         });
 
         bgImg.addEventListener('error', function () {
-            const now = Date.now();
-            const timeLeft = bgDeadline - now;
+            const timeLeft = bgDeadline - Date.now();
 
             if (timeLeft <= 0) {
                 revealPage();
+                const finalImg = new Image();
+                finalImg.addEventListener('load', function () {
+                    const loadedUrl = finalImg.currentSrc || finalImg.src;
+                    document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
+                });
+                finalImg.src = backgroundImageUrl;
                 return;
             }
 
             const nextDelay = Math.min(bgRetryIntervalMs, timeLeft);
-            setTimeout(function () {
-                requestBgImage();
-            }, nextDelay);
+            setTimeout(requestBgImage, nextDelay);
         });
 
         bgImg.src = backgroundImageUrl;

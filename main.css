@@ -310,13 +310,13 @@ h1 {
 
 @media (max-width: 768px) {
     .avatar {
-        margin-top: 24px;
+        margin-top: 25px;
     }
 
     h1 {
-        margin-top: 8px;
-        margin-bottom: 6px;
-        font-size: 50px;
+        margin-top: 9px;
+        margin-bottom: 9px;
+        font-size: 52px;
     }
 
     .projects-up,
@@ -327,10 +327,7 @@ h1 {
     }
 
     .divider {
-        margin: 12px auto;
+        margin: 16px auto;
     }
 
-    .quote {
-        font-size: 16px;
-    }
 }

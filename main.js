@@ -1,5 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
+    const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,koh,nature';
+
+    const bgImg = new Image();
+    bgImg.decoding = 'async';
+    bgImg.src = backgroundImageUrl;
+
+    bgImg.addEventListener('load', function () {
+        const loadedUrl = bgImg.currentSrc || bgImg.src;
+        document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
+        document.body.classList.add('bg-ready');
+    });
 
     const projectus = [ 'drive', 'cloud' ];//project-up-select
     const projectudcs = [ 'AList', 'Cloudreve' ];//project-up-description-select

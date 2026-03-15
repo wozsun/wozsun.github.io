@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
-    const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,koh,nature';
+    const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,nature';
 
     const bgImg = new Image();
     bgImg.decoding = 'async';

@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
     const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,nature';
-    const bgRetryIntervalMs = 100;
-    const bgTotalTimeoutMs = 2000;
+    const bgRetryIntervalMs = 50;
+    const bgTotalTimeoutMs = 1500;
 
     let hasRevealed = false;
     let bgTimeoutId = null;

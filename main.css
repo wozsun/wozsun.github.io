@@ -154,7 +154,7 @@ h1 {
     font-family: 'Monoton', sans-serif;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 56px;
+    font-size: 68px;
     font-weight: normal;
     text-align: center;
     letter-spacing: 3px;
@@ -310,13 +310,13 @@ h1 {
 
 @media (max-width: 768px) {
     .avatar {
-        margin-top: 25px;
+        margin-top: 26px;
     }
 
     h1 {
         margin-top: 9px;
         margin-bottom: 9px;
-        font-size: 52px;
+        font-size: 60px;
     }
 
     .projects-up,

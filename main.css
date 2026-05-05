@@ -47,6 +47,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100dvh;
+    box-sizing: border-box;
     font-family: 'Noto Sans SC', sans-serif;
     margin: 0;
     overflow-x: hidden;
@@ -310,6 +311,10 @@ h1 {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    }
+
     .avatar {
         margin-top: 26px;
     }

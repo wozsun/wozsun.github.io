@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const bgTotalTimeoutMs = 1500;
 
     let hasRevealed = false;
+    let hasShownBackground = false;
     let bgTimeoutId = null;
     const bgDeadline = Date.now() + bgTotalTimeoutMs;
-    const revealPage = function (loadedUrl) {
+    const revealPage = function () {
         if (hasRevealed) {
             return;
         }
@@ -16,33 +17,45 @@ document.addEventListener('DOMContentLoaded', function () {
         clearTimeout(bgTimeoutId);
         bgTimeoutId = null;
 
-        if (loadedUrl) {
-            document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
-        }
-
         document.body.classList.add('bg-ready');
     };
 
-    const requestBgImage = function () {
-        if (hasRevealed) {
+    const showBackgroundImage = function (bgImg) {
+        if (hasShownBackground) {
             return;
         }
+        hasShownBackground = true;
 
-        if (Date.now() >= bgDeadline) {
+        document.body.prepend(bgImg);
+        requestAnimationFrame(function () {
+            document.body.classList.add('bg-visible');
             revealPage();
+        });
+    };
+
+    const requestBgImage = function () {
+        if (hasShownBackground) {
             return;
         }
 
         const bgImg = new Image();
+        bgImg.className = 'background-image';
+        bgImg.alt = '';
         bgImg.decoding = 'async';
+        bgImg.loading = 'eager';
+        bgImg.setAttribute('aria-hidden', 'true');
 
         bgImg.addEventListener('load', function () {
-            const loadedUrl = bgImg.currentSrc || bgImg.src;
-            if (hasRevealed) {
-                document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
-            } else {
-                revealPage(loadedUrl);
+            const revealLoadedImage = function () {
+                showBackgroundImage(bgImg);
+            };
+
+            if (bgImg.decode) {
+                bgImg.decode().then(revealLoadedImage, revealLoadedImage);
+                return;
             }
+
+            revealLoadedImage();
         });
 
         bgImg.addEventListener('error', function () {
@@ -50,12 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (timeLeft <= 0) {
                 revealPage();
-                const finalImg = new Image();
-                finalImg.addEventListener('load', function () {
-                    const loadedUrl = finalImg.currentSrc || finalImg.src;
-                    document.body.style.setProperty('--bg-url', `url("${loadedUrl}")`);
-                });
-                finalImg.src = backgroundImageUrl;
                 return;
             }
 
@@ -66,11 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
         bgImg.src = backgroundImageUrl;
     };
 
-    requestBgImage();
-
     bgTimeoutId = setTimeout(function () {
         revealPage();
     }, bgTotalTimeoutMs);
+
+    requestBgImage();
 
     const projectus = [ 'drive', 'cloud' ];//project-up-select
     const projectudcs = [ 'AList', 'Cloudreve' ];//project-up-description-select

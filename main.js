@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let footer = document.querySelector('.footer');
     footer.innerHTML = `
         <div>
-            <a class="flinktxt" href="https://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">鄂ICP备2022020520号-1</a> |
-            <a class="flinktxt" href="https://beian.mps.gov.cn/#/query/webSearch?code=42060002000302" rel="noopener noreferrer" target="_blank">鄂公网安备42060002000302号</a>
+            <a class="flinktxt" href="https://beian.miit.gov.cn/" rel="nofollow noopener noreferrer" target="_blank">鄂ICP备2022020520号-1</a> |
+            <a class="flinktxt" href="https://beian.mps.gov.cn/#/query/webSearch?code=42060002000302" rel="nofollow noopener noreferrer" target="_blank">鄂公网安备42060002000302号</a>
         </div>
         <div>
             Copyright © 2022-${currentYear} <a class="flinktxt" href="https://wozsun.com" rel="noopener noreferrer" target="_blank">wozsun</a> | All Rights Reserved

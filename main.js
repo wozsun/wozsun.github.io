@@ -135,10 +135,10 @@ document.addEventListener('DOMContentLoaded', function () {
         scheduleNextBackground(backgroundCycleMs);
     });
 
-    const projectus = [ 'drive', 'cloud' ];//project-up-select
-    const projectudcs = [ 'AList', 'Cloudreve' ];//project-up-description-select
-    const projectds = [];//project-down-select
-    const projectddcs = [];//project-down-description-select
+    const projectus = [ 'img' ];//project-up-select
+    const projectudcs = [ 'ImageShow' ];//project-up-description-select
+    const projectds = [ 'drive', 'cloud' ];//project-down-select
+    const projectddcs = [ 'AList', 'Cloudreve' ];//project-down-description-select
 
     if (projectus.length === 0) {
         let projectsuDiv = document.querySelector('.projects-up');

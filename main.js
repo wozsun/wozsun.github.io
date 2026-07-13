@@ -1,83 +1,139 @@
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
     const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,nature&m=redirect';
-    const bgRetryIntervalMs = 50;
-    const bgTotalTimeoutMs = 1500;
+    const backgroundCycleMs = 10000;
+    const backgroundCrossfadeMs = 1600;
+    const initialRevealTimeoutMs = 1500;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const backgroundStage = document.querySelector('.background-stage');
 
+    let currentBackground = null;
+    let backgroundTimerId = null;
+    let backgroundRequestInFlight = false;
     let hasRevealed = false;
-    let hasShownBackground = false;
-    let bgTimeoutId = null;
-    const bgDeadline = Date.now() + bgTotalTimeoutMs;
     const revealPage = function () {
         if (hasRevealed) {
             return;
         }
         hasRevealed = true;
-
-        clearTimeout(bgTimeoutId);
-        bgTimeoutId = null;
-
         document.body.classList.add('bg-ready');
     };
 
-    const showBackgroundImage = function (bgImg) {
-        if (hasShownBackground) {
-            return;
-        }
-        hasShownBackground = true;
-
-        document.body.prepend(bgImg);
-        requestAnimationFrame(function () {
-            document.body.classList.add('bg-visible');
-            revealPage();
-        });
+    const clearBackgroundTimer = function () {
+        window.clearTimeout(backgroundTimerId);
+        backgroundTimerId = null;
     };
 
-    const requestBgImage = function () {
-        if (hasShownBackground) {
+    const scheduleNextBackground = function (delay = backgroundCycleMs) {
+        clearBackgroundTimer();
+
+        if (reduceMotion.matches || document.hidden) {
             return;
         }
 
+        backgroundTimerId = window.setTimeout(function () {
+            loadNextBackground({ initial: false });
+        }, delay);
+    };
+
+    const activateBackground = function (bgImg) {
+        const previousImage = currentBackground;
+        backgroundStage.append(bgImg);
+
+        requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+                bgImg.classList.add('is-active');
+                document.body.classList.add('bg-visible');
+                revealPage();
+
+                if (previousImage) {
+                    previousImage.classList.add('is-leaving');
+                    window.setTimeout(function () {
+                        previousImage.remove();
+                    }, backgroundCrossfadeMs);
+                }
+            });
+        });
+
+        currentBackground = bgImg;
+
+        backgroundStage.querySelectorAll('.background-image').forEach(function (image) {
+            if (image !== bgImg && image !== previousImage) {
+                image.remove();
+            }
+        });
+
+        scheduleNextBackground(backgroundCycleMs);
+    };
+
+    const loadNextBackground = function ({ initial = false } = {}) {
+        if (!backgroundStage) {
+            revealPage();
+            return;
+        }
+
+        if (backgroundRequestInFlight || document.hidden || (!initial && reduceMotion.matches)) {
+            return;
+        }
+
+        backgroundRequestInFlight = true;
         const bgImg = new Image();
-        bgImg.className = 'background-image';
+        bgImg.className = initial ? 'background-image is-initial' : 'background-image';
         bgImg.alt = '';
         bgImg.decoding = 'async';
-        bgImg.loading = 'eager';
         bgImg.setAttribute('aria-hidden', 'true');
 
-        bgImg.addEventListener('load', function () {
-            const revealLoadedImage = function () {
-                showBackgroundImage(bgImg);
-            };
-
-            if (bgImg.decode) {
-                bgImg.decode().then(revealLoadedImage, revealLoadedImage);
-                return;
+        bgImg.addEventListener('load', async function () {
+            try {
+                if (bgImg.decode) {
+                    await bgImg.decode();
+                }
+            } catch {
+                // A completed load is still safe to display if decoding rejects.
             }
 
-            revealLoadedImage();
-        });
+            backgroundRequestInFlight = false;
+            activateBackground(bgImg);
+        }, { once: true });
 
         bgImg.addEventListener('error', function () {
-            const timeLeft = bgDeadline - Date.now();
-
-            if (timeLeft <= 0) {
-                revealPage();
-                return;
-            }
-
-            const nextDelay = Math.min(bgRetryIntervalMs, timeLeft);
-            setTimeout(requestBgImage, nextDelay);
-        });
+            backgroundRequestInFlight = false;
+            revealPage();
+            scheduleNextBackground(backgroundCycleMs);
+        }, { once: true });
 
         bgImg.src = backgroundImageUrl;
     };
 
-    bgTimeoutId = setTimeout(function () {
-        revealPage();
-    }, bgTotalTimeoutMs);
+    window.setTimeout(revealPage, initialRevealTimeoutMs);
+    loadNextBackground({ initial: true });
 
-    requestBgImage();
+    document.addEventListener('visibilitychange', function () {
+        if (document.hidden) {
+            clearBackgroundTimer();
+            return;
+        }
+
+        if (!currentBackground) {
+            loadNextBackground({ initial: true });
+            return;
+        }
+
+        if (!reduceMotion.matches && !backgroundRequestInFlight) {
+            scheduleNextBackground(backgroundCycleMs);
+        }
+    });
+
+    reduceMotion.addEventListener('change', function () {
+        if (reduceMotion.matches) {
+            clearBackgroundTimer();
+            return;
+        }
+
+        scheduleNextBackground(backgroundCycleMs);
+    });
 
     const projectus = [ 'drive', 'cloud' ];//project-up-select
     const projectudcs = [ 'AList', 'Cloudreve' ];//project-up-description-select

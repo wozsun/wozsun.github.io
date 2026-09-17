@@ -2,7 +2,7 @@ document.documentElement.classList.add('js');
 
 document.addEventListener('DOMContentLoaded', function () {
     const currentYear = new Date().getFullYear();
-    const backgroundImageUrl = 'https://api.wozsun.com/random-img?b=dark&t=wlop,acg,nature&m=redirect';
+    const backgroundImageUrl = 'https://img.wozsun.com/random?brightness=dark&theme=wlop,acg,nature,koh';
     const backgroundCycleMs = 10000;
     const backgroundCrossfadeMs = 1600;
     const initialRevealTimeoutMs = 1500;
@@ -137,8 +137,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const projectus = [ 'img' ];//project-up-select
     const projectudcs = [ 'ImageShow' ];//project-up-description-select
-    const projectds = [ 'drive', 'cloud' ];//project-down-select
-    const projectddcs = [ 'AList', 'Cloudreve' ];//project-down-description-select
+    const projectds = [];//project-down-select
+    const projectddcs = [];//project-down-description-select
 
     if (projectus.length === 0) {
         let projectsuDiv = document.querySelector('.projects-up');
@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
             Copyright © 2022-${currentYear} <a class="flinktxt" href="https://wozsun.com" rel="noopener noreferrer" target="_blank">wozsun</a> | All Rights Reserved
         </div>
         <div>
-            Powered by Aliyun ESA & Tencent Cloud
+            Powered by Aliyun & Tencent Cloud
         </div>
     `;
 })

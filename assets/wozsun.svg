@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="882" height="882" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;fill-rule:evenodd;clip-rule:evenodd">
+  <path style="opacity:1" fill="#05aaff" d="M-.5-.5h482v82h-400v718h240v82H-.5V-.5z"/>
+  <path style="opacity:1" fill="transparent" d="M481.5-.5h78v82h240v718h-400v82h-78v-82h-240v-718h400v-82z"/>
+  <path style="opacity:1" fill="#05aaff" d="M559.5-.5h322v882h-482v-82h400v-718h-240v-82z"/>
+  <path style="opacity:1" fill="#05ccff" d="M159.5 159.5h562v322h-82v-80h-80v-82h80v-78h-398v80h-82v-162z"/>
+  <path style="opacity:1" fill="#05ffaa" d="M319.5 319.5h162v82h-162v-82z"/>
+  <path style="opacity:1" fill="#05ccff" d="M159.5 399.5h82v80h80v82h-80v78h398v-80h82v162h-562v-322z"/>
+  <path style="opacity:1" fill="#05ffaa" d="M399.5 479.5h162v82h-162v-82z"/>
+</svg>
